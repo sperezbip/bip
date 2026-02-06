@@ -1,2 +1,4 @@
 git add .
-git commit -m "primer workflow powershell"
+git commit -m "workflow powershell listo"
+git push
+

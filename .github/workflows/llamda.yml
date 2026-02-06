@@ -2,18 +2,14 @@ name: Ejecutar script PowerShell
 
 on:
   push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   ejecutar:
     runs-on: windows-latest
-
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Ejecutar script PowerShell
         shell: pwsh
-        run: |
-          ./holamundo.ps1
+        run: ./holamundo.ps1

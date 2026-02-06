@@ -1,3 +1,3 @@
 git add .
-git commit -m "workflow funcionando"
+git commit -m "crear carpeta desde script"
 git push

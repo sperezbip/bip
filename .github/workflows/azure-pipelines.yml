@@ -1,0 +1,37 @@
+trigger:
+- pre
+
+pool:
+  name: Default
+  demands:
+  - Agent.Name -equals SERGIO-PC-NEW
+
+steps:
+- task: PowerShell@2
+  displayName: Crear carpeta en mi PC
+  inputs:
+    targetType: filePath
+    filePath: launcher.ps1
+
+- task: PowerShell@2
+  displayName: Crear carpeta datos en mi PC
+  inputs:
+    targetType: filePath
+    filePath: launcher2.ps1
+
+- task: PowerShell@2
+  displayName: dar permisos ntfs a SERGIO
+  inputs:
+    targetType: filePath
+    filePath: launcher3.ps1
+
+- task: AzureCLI@2
+  displayName: Probar Key Vault
+  inputs:
+    azureSubscription: 'sc-azure-devops'
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: |
+      $env:PATH = "C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;" + $env:PATH
+      az keyvault secret show --vault-name kv-test-sperez --name "TEST-API-KEY" --query value -o tsv *> $null
+      Write-Host "✅ OK: AzureCLI pudo leer el secreto"
